@@ -1,11 +1,44 @@
 {
-  "plugins": ["unused-imports", "only-warn"],
-  "extends": ["airbnb", "airbnb-typescript"],
+  "root": true,
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./tsconfig.json"
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "env": {
+    "browser": true,
+    "amd": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended" // Make sure this is always the last element in the array.
+  ],
+  "plugins": ["simple-import-sort", "prettier", "unused-imports", "import"],
   "rules": {
+    "prettier/prettier": ["warn", {}, { "usePrettierrc": true }],
     "react/react-in-jsx-scope": "off",
+
+    "simple-import-sort/imports": "warn",
+    "simple-import-sort/exports": "warn",
 
     "@typescript-eslint/no-unused-vars": "off",
     "unused-imports/no-unused-imports": "warn",
@@ -17,6 +50,9 @@
         "args": "after-used",
         "argsIgnorePattern": "^_"
       }
-    ]
+    ],
+
+    "import/no-duplicates": "warn",
+    "@typescript-eslint/no-explicit-any": "off"
   }
 }
