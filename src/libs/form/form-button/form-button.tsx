@@ -1,16 +1,8 @@
-import LoadingButton, { LoadingButtonProps } from '@mui/lab/LoadingButton';
+import Button, { ButtonProps } from '@mui/material/Button';
 import { useFormState } from 'react-hook-form';
 
-export default function FormButton(props: LoadingButtonProps) {
+export default function FormButton(props: ButtonProps) {
   const { isSubmitting } = useFormState();
 
-  return (
-    <LoadingButton
-      {...props}
-      loading={
-        typeof props.loading === 'boolean' ? props.loading : isSubmitting
-      }
-      loadingPosition="end"
-    />
-  );
+  return <Button {...props} disabled={isSubmitting || props.disabled} />;
 }

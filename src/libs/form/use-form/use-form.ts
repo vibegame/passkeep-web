@@ -9,7 +9,7 @@ const useForm = <TFieldValues extends FieldValues = FieldValues>({
   ...rest
 }: UseFormProps<TFieldValues> = {}) => {
   return useFormNative<TFieldValues, any>({
-    mode: 'onChange',
+    mode: 'all',
     resolver: validationSchema ? yupResolver(validationSchema) : undefined,
     ...rest,
   });

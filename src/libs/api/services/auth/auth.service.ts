@@ -1,9 +1,9 @@
 import { AxiosError } from 'axios';
 
-import apiClient from '../../api-client';
+import { apiClient } from '../../api-client';
 import { User } from '../../types';
 
-const authService = {
+export const authService = {
   async login(email: string, password: string) {
     const users = (
       await apiClient.get<User[]>('/users', {
@@ -27,5 +27,3 @@ const authService = {
     return user;
   },
 };
-
-export default authService;

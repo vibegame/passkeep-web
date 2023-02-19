@@ -1,9 +1,7 @@
-import { colors } from '@app/libs/ui';
+import { createStyles, SxProps } from '@libs/ui/theme';
 import Collapse from '@mui/material/Collapse';
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
-import FormLabel from '@mui/material/FormLabel';
-import Typography from '@mui/material/Typography';
 import { isFunction } from 'lodash';
 import { cloneElement, ReactElement, ReactNode } from 'react';
 import {
@@ -14,20 +12,21 @@ import {
   UseControllerReturn,
 } from 'react-hook-form';
 
-import { styles } from './duck';
+import FormItemLabel from './form-item-label';
 
 interface FormItemProps<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > {
   name: TName;
-  control: Control<TFieldValues>;
+  control?: Control<TFieldValues>;
   children:
     | ReactElement
     | ((controller: UseControllerReturn<TFieldValues, TName>) => ReactElement);
   label?: ReactNode;
   required?: boolean;
   fullWidth?: boolean;
+  sx?: SxProps;
 }
 
 const FormItem = <
@@ -40,29 +39,25 @@ const FormItem = <
   label,
   required,
   fullWidth = true,
+  sx,
 }: FormItemProps<TFieldValues, TName>) => {
   const controller = useController({ name, control });
-  const { fieldState } = controller;
+  const { fieldState, formState } = controller;
+  const { isSubmitting } = formState;
   const { isTouched, error: fieldError } = fieldState;
   const error = isTouched ? fieldError?.message : undefined;
 
   return (
-    <FormControl error={!!error} fullWidth={fullWidth}>
-      {label && (
-        <FormLabel sx={{ mb: 2, fontWeight: 500, fontSize: 14 }}>
-          {required && (
-            <>
-              <Typography
-                component="span"
-                color={colors.red[600]}
-                fontWeight={700}
-              >
-                *
-              </Typography>{' '}
-            </>
-          )}
+    <FormControl
+      error={!!error}
+      fullWidth={fullWidth}
+      disabled={isSubmitting}
+      sx={sx}
+    >
+      {!!label && (
+        <FormItemLabel required={required} sx={{ mb: 2 }}>
           {label}
-        </FormLabel>
+        </FormItemLabel>
       )}
 
       {isFunction(children)
@@ -80,5 +75,13 @@ const FormItem = <
     </FormControl>
   );
 };
+
+const styles = createStyles({
+  formHelperText: {
+    height: 24,
+    lineHeight: '24px',
+    margin: '3px 0 0 0',
+  },
+});
 
 export default FormItem;

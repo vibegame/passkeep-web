@@ -1,9 +1,32 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "75c84e7f-f4d4-47dd-a8d1-b2aac912ca9e",
       "email": "vibegame.official@gmail.com",
       "password": "123456"
+    }
+  ],
+  "clues": [
+    {
+      "id": "b777dd36-5e50-46bc-87f3-c7255313bb74",
+      "title": "GitHub",
+      "userId": "75c84e7f-f4d4-47dd-a8d1-b2aac912ca9e"
+    }
+  ],
+  "clueFields": [
+    {
+      "id": "d586bd1d-45bc-4ce6-80d0-e830970ad603",
+      "title": "Username",
+      "value": "vibegame",
+      "secret": false,
+      "clueId": "b777dd36-5e50-46bc-87f3-c7255313bb74"
+    },
+    {
+      "id": "3ed7bae4-8e85-40ca-a903-5d8075a325bb",
+      "title": "Password",
+      "value": "123456",
+      "secret": true,
+      "clueId": "b777dd36-5e50-46bc-87f3-c7255313bb74"
     }
   ]
 }

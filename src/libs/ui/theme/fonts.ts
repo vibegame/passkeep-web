@@ -1,1 +1,1 @@
-export const fontFamily = `"Roboto","Helvetica","Arial",sans-serif`;
+export const fontFamily = `Poppins, sans-serif`;

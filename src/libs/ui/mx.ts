@@ -4,6 +4,7 @@ const createPrimitive = <T extends keyof JSX.IntrinsicElements>(tag: T) =>
   styled(tag)``;
 
 export const mx = {
+  header: createPrimitive('div'),
   div: createPrimitive('div'),
   span: createPrimitive('span'),
   form: createPrimitive('form'),
@@ -14,4 +15,5 @@ export const mx = {
   button: createPrimitive('button'),
   text: createPrimitive('text'),
   g: createPrimitive('g'),
+  li: createPrimitive('li'),
 };

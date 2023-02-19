@@ -1,3 +1,6 @@
-import { SxProps as MUISxProps, Theme } from '@mui/material';
+import { Theme } from '@mui/material';
+import { SystemStyleObject } from '@mui/system';
 
-export type SxProps = MUISxProps<Theme>;
+export type StyleObject = SystemStyleObject<Theme>;
+export type Style = StyleObject | ((theme: Theme) => StyleObject);
+export type SxProps = Style | Style[];
