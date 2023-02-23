@@ -102,6 +102,10 @@ const theme = createTheme({
         root: {
           paddingTop: 8,
           paddingBottom: 8,
+
+          '&.Mui-selected, &.Mui-selected:hover': {
+            backgroundColor: colors.darkPurple[400],
+          },
         },
       },
     },
@@ -125,6 +129,7 @@ const theme = createTheme({
           '&.MuiMenu-paper': {
             minWidth: 120,
             borderRadius: 8,
+            backgroundColor: colors.darkPurple[400],
           },
         },
       },

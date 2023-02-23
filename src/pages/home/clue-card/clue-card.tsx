@@ -99,7 +99,6 @@ const styles = createStyles({
     position: 'relative',
     padding: theme.spacing(3, 5),
     width: '100%',
-    boxShadow: '0px 6px 8px 0px rgb(0 0 0 / 10%)',
     height: CLUE_CARD_HEIGHT,
   }),
 });

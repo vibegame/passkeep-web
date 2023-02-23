@@ -1,45 +1,24 @@
 import { logoSrc } from '@app/assets';
 import Link from '@mui/material/Link';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
 import Typography from '@mui/material/Typography';
 import { ReactNode } from 'react';
-import {
-  IoLockClosed,
-  IoLogOutOutline,
-  IoSettingsSharp,
-} from 'react-icons/io5';
-import { matchPath, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-import { Icon } from '../../icons';
 import { mx } from '../../mx';
 import { createStyles } from '../../theme';
 import { LAYOUT_HEADER_HEIGHT } from './auth-layout.constants';
+import AuthLayoutNavigation from './auth-layout-navigation';
 
 interface AuthLayoutProps {
   children?: ReactNode;
 }
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const handleNavigate = (to: string) => navigate(to);
-
-  const matchPathname = (url: string) => !!matchPath(url, location.pathname);
-
   return (
     <mx.div sx={styles.layout}>
       <mx.div sx={{ display: 'flex', height: '100%' }}>
         <mx.aside sx={styles.sider}>
-          <mx.div
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              py: 8,
-            }}
-          >
+          <mx.div sx={styles.logoContainer}>
             <Link sx={styles.logoLink} component={NavLink} to="/">
               <mx.img src={logoSrc} alt="Header Logo" sx={{ height: 24 }} />
 
@@ -49,50 +28,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
             </Link>
           </mx.div>
 
-          <MenuList
-            sx={{
-              '.MuiMenuItem-root': {
-                borderRadius: 2,
-                py: 4,
-                fontWeight: 500,
-
-                '&.Mui-selected': {
-                  bgcolor: '#2B294A',
-                },
-
-                '&:not(:first-child)': {
-                  mt: 2,
-                },
-              },
-            }}
-          >
-            <MenuItem
-              onClick={() => handleNavigate('/')}
-              selected={matchPathname('/')}
-            >
-              <ListItemIcon>
-                <Icon icon={IoLockClosed} />
-              </ListItemIcon>
-              Passwords
-            </MenuItem>
-
-            <MenuItem
-              onClick={() => handleNavigate('/settings')}
-              selected={matchPathname('/settings')}
-            >
-              <ListItemIcon>
-                <Icon icon={IoSettingsSharp} />
-              </ListItemIcon>
-              Settings
-            </MenuItem>
-
-            <MenuItem>
-              <ListItemIcon>
-                <Icon icon={IoLogOutOutline} />
-              </ListItemIcon>
-              Log out
-            </MenuItem>
-          </MenuList>
+          <AuthLayoutNavigation />
         </mx.aside>
 
         <mx.main sx={styles.content}>{children}</mx.main>
@@ -139,5 +75,10 @@ const styles = createStyles({
   avatar: {
     cursor: 'pointer',
     ml: 'auto',
+  },
+  logoContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    py: 8,
   },
 });
